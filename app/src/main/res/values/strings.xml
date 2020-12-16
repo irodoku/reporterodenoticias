@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">reportero de noticias</string>
+    <string name="tab_text_1">Noticias</string>
+    <string name="tab_text_2">Info</string>
+</resources>
