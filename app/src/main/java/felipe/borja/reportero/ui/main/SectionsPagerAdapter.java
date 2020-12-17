@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import felipe.borja.reportero.R;
 
 /**
@@ -25,6 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
@@ -35,9 +38,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return FirstFragment.newInstance(1, String.valueOf(getPageTitle(1)));
             default:
-                return null;
+                return FirstFragment.newInstance(position + 1,"null");
         }
-        //return PlaceholderFragment.newInstance(position + 1);
     }
 
     @Nullable

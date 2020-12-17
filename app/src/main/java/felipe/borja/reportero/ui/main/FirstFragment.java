@@ -1,21 +1,15 @@
 package felipe.borja.reportero.ui.main;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,24 +21,27 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import felipe.borja.reportero.MainActivity;
+import felipe.borja.reportero.ListAdapter;
 import felipe.borja.reportero.R;
-import felipe.borja.reportero.databinding.FragmentMainBinding;
 
 public class FirstFragment extends Fragment {
     // Store instance variables
     private String title;
-    private int page;
+    private int pagina;
     RecyclerView recyclerView;
-    ArrayList<String> noticias;
+    private ArrayList<String> noticias;
+    private ArrayList<String> infos;
+    private PageViewModel pageViewModel;
+    public ArrayList<String> lista;
 
     // newInstance constructor for creating fragment with arguments
     public static FirstFragment newInstance(int page, String title) {
         FirstFragment fragmentFirst = new FirstFragment();
         Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
+        args.putInt("pagina", page);
+        args.putString("titulo", title);
         fragmentFirst.setArguments(args);
+        Log.e("newInstance","p"+page);
         return fragmentFirst;
     }
 
@@ -52,8 +49,15 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
+        pagina = getArguments().getInt("pagina", 0);
+        title = getArguments().getString("titulo");
+        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        pageViewModel.setIndex(pagina);
+        noticias  = new ArrayList<>();
+        infos  = new ArrayList<>();
+        addNoticias();
+        addInfo();
+        Log.e("onCreate","p"+pagina);
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -68,16 +72,45 @@ public class FirstFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(llm);
-        noticias  = new ArrayList<>();
+        ListAdapter adapter;
+        lista  = new ArrayList<>();
+        switch (pagina) {
+            case 0:adapter = new ListAdapter(view.getContext(),noticias );break;
+            case 1:adapter = new ListAdapter(view.getContext(),infos);break;
+            default: throw new IllegalStateException("Index incorrecto: " + pagina);
+        }
+        Log.e("onCreateView","p"+pagina);
+
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        //adapter.ordenar();
+        pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                //adapter.ordenar();
+                lista.add("asdfghjkl");
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        return view;
+    }
+
+    private void addNoticias(){
+        //noticias.clear();
         noticias.add("asdasdasd");
         noticias.add("zxczxczxc");
-        noticias.add("qweqweqwe");
-        noticias.add("qweasdzxc");
-        RecyclerAdapter adapter = new RecyclerAdapter(view.getContext(),noticias );
-        recyclerView.setAdapter(adapter);
+        noticias.add("asdasdasd");
+        noticias.add("zxczxczxc");
 
-        adapter.ordenar();
-        return view;
+    }
+
+    private void addInfo(){
+        //infos.clear();
+        infos.add("qweqweqwe");
+        infos.add("qweasdzxc");
+        infos.add("qweqweqwe");
+        infos.add("qweasdzxc");
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -112,7 +145,7 @@ public class FirstFragment extends Fragment {
         public void onBindViewHolder(ViewHolder holder, int position) {
             this.posi=holder.getAdapterPosition();
             String tipoTxt;
-            holder.nombre.setText(noticias.get(posi));
+            holder.nombre.setText(lista.get(posi));
 
             holder.nombre.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("RestrictedApi")
@@ -127,11 +160,11 @@ public class FirstFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return noticias.size();
+            return lista.size();
         }
 
         public void ordenar(){
-            Collections.sort(noticias, new Comparator<String>(){
+            Collections.sort(lista, new Comparator<String>(){
                 @Override
                 public int compare(String x, String y) {
                     return (x.compareTo(y));
