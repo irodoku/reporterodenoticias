@@ -22,14 +22,16 @@ import java.util.Comparator;
 import java.util.List;
 
 import felipe.borja.reportero.ListAdapter;
+import felipe.borja.reportero.Noticia;
 import felipe.borja.reportero.R;
+import felipe.borja.reportero.medios;
 
 public class FirstFragment extends Fragment {
     // Store instance variables
     private String title;
     private int pagina;
     RecyclerView recyclerView;
-    private ArrayList<String> noticias;
+    private ArrayList<Noticia> noticias;
     private ArrayList<String> infos;
     private PageViewModel pageViewModel;
     public ArrayList<String> lista;
@@ -98,11 +100,15 @@ public class FirstFragment extends Fragment {
 
     private void addNoticias(){
         //noticias.clear();
-        noticias.add("asdasdasd");
-        noticias.add("zxczxczxc");
-        noticias.add("asdasdasd");
-        noticias.add("zxczxczxc");
-
+        noticias.add(new Noticia("Ecuador registra alta velocidad de transmisión del covid-19",
+                "Las autoridades del Comité de Operaciones de Emergencia Nacional (COE) justificaron el estado de excepción por 30 días, debido al incremento exponencial de aglomeraciones en los cantones más poblados y por las reuniones de festividades.",
+                        "https://www.elcomercio.com/actualidad/ecuador-covid-velocidad-transmision-contagio.html", medios.elcomercio));
+        noticias.add(new Noticia("El covid-19 ha tenido siete mutaciones principales a la nueva variante se la ha denominado SARS-CoV-2 VUI 202012/01.",
+                "El Centro Europeo para la Prevención y el Control de Enfermedades (ECDC) comenzó a examinar la nueva cepa del coronavirus de rápida propagación, que surgió en el Reino Unido, y sus implicaciones en la salud humana.",
+                "https://www.eltelegrafo.com.ec/noticias/sociedad/6/covid-19-siete-mutaciones-principales" ,medios.eltelegrafo));
+        noticias.add(new Noticia("Cero salidas nocturnas por 15 días",
+                "El Gobierno nacional decretó un nuevo estado de excepción que rige desde el 21 de diciembre del 2020 y que se extenderá durante 30 días. Esta es una de las nueve disposiciones anunciadas por el presidente",
+                "https://www.ultimasnoticias.ec/las-ultimas/excepcion-ecuador-navidad-covid.html" ,medios.ultimasnoticias));
     }
 
     private void addInfo(){
