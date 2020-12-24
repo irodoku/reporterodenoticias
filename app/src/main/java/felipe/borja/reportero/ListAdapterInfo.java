@@ -25,22 +25,18 @@ import static felipe.borja.reportero.R.drawable.ico_tel;
 import static felipe.borja.reportero.R.drawable.ico_ult;
 import static felipe.borja.reportero.R.drawable.ico_uni;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapterInfo extends RecyclerView.Adapter<ListAdapterInfo.ViewHolder> {
 
     private Context context;
     private int posi;
-    List<Noticia> lista=new ArrayList<>();
+
     List<Info> infos=new ArrayList<>();
 
-
-    public ListAdapter(Context context1, List<Noticia> valuesList) {
-        super();//context1, R.layout.rest_list_item,valuesList
-        this.context=context1;
-        lista=valuesList;
-        //infos.clear();
-        Log.e("ListAdapter","notic");
+    public ListAdapterInfo(Context context, ArrayList<Info> infos) {
+        this.context=context;
+        this.infos=infos;
+        Log.e("ListAdapter","infos");
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView cabeza;
@@ -71,12 +67,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         this.posi=holder.getAdapterPosition();
         String urlTemp;
 
-        holder.cabeza.setText(lista.get(posi).getCabeza());
-        holder.cuerpo.setText(lista.get(posi).getCuerpo());
-        urlTemp = lista.get(posi).getLink();
-        setLogoMedios(holder,lista.get(posi));
-        Log.e("onBindViewHolder","esNoticia");
-
+        holder.cabeza.setText(infos.get(posi).getTitulo());
+        holder.cuerpo.setText(infos.get(posi).getLink());
+        urlTemp = infos.get(posi).getLink();
+        Log.e("onBindViewHolder","NO esNoticia");
         final String url = urlTemp;
         holder.contenedor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +78,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 abrirLink(url);
             }
         });
-
 
     }
 
@@ -110,15 +103,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return lista.size();
+        return infos.size();
     }
 
-    public void ordenar(){
-        Collections.sort(lista, new Comparator<Noticia>(){
-            @Override
-            public int compare(Noticia x, Noticia y) {
-                return (x.getCabeza().compareTo(y.getCabeza()));
-            }
-        });
-    }
 }
