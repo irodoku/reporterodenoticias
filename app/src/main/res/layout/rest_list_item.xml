@@ -3,21 +3,41 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100sp"
-    android:padding="2dp"
+    android:layout_height="200sp"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:background="@color/white"
+    android:id="@+id/item_container"
     >
     <TextView
         android:id="@+id/nombre"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:padding="5dp"
+        android:gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:text="Nombre del noticiero"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="100dp"
+        android:text="Titulo de la noticia Titulo de la noticia Titulo de la noticia"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@color/blue_A700"
+        android:textSize="19sp"
+        android:textColor="@color/indigo_600"
         tools:ignore="HardcodedText"/>
-
+    <TextView
+        android:id="@+id/descrip"
+        android:gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/nombre"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut quam risus. Fusce libero est, congue eu fermentum id, ultricies id tellus. Vivamus justo mauris, accumsan aliquam dui sed, placerat dignissim felis."
+        android:textSize="16sp"
+        android:textColor="@color/indigo_400"
+        tools:ignore="HardcodedText"/>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_institution"
+        >
+    </ImageView>
 </RelativeLayout>
