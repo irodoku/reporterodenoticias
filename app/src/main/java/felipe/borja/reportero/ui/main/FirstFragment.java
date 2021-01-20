@@ -1,6 +1,4 @@
 package felipe.borja.reportero.ui.main;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -16,11 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
+import felipe.borja.reportero.bdd.BaseAdmin;
 import felipe.borja.reportero.Info;
 import felipe.borja.reportero.ListAdapter;
 import felipe.borja.reportero.ListAdapterInfo;
@@ -36,6 +32,7 @@ public class FirstFragment extends Fragment {
     private ArrayList<Noticia> noticias;
     private ArrayList<Info> infos;
     private PageViewModel pageViewModel;
+    public BaseAdmin baseAdmin;
     //public ArrayList<String> lista;
 
     // newInstance constructor for creating fragment with arguments
@@ -59,6 +56,18 @@ public class FirstFragment extends Fragment {
         pageViewModel.setIndex(pagina);
         noticias  = new ArrayList<>();
         infos  = new ArrayList<>();
+        baseAdmin = new BaseAdmin(this.getContext());
+        try {
+            baseAdmin.abrir();
+            baseAdmin.borrarTabla();
+            baseAdmin.insertarBase();
+            //baseAdmin.insertar("titulo","cuerpo","https://www.youtube.com/","medios.mercurio");
+            ArrayList<Noticia> noticiasBase = baseAdmin.getBDD();
+            baseAdmin.cerrar();
+            noticias.addAll(noticiasBase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         addNoticias();
         addInfo();
         Log.e("onCreate","p"+pagina);
