@@ -16,6 +16,24 @@ public class Noticia {
         this.link = link;
     }
 
+    public Noticia(String cabeza, String cuerpo, String link,String medioTxt) {
+        this.cabeza = cabeza;
+        this.cuerpo = cuerpo;
+        this.medio = stringToMedio(medioTxt);
+        this.link = link;
+    }
+
+    private medios stringToMedio(String s){
+        if( s.contains("omercio") )return medios.elcomercio;
+        if( s.contains("lahora") )return medios.lahora;
+        if( s.contains("ercurio") )return medios.mercurio;
+        if( s.contains("rimicias") )return medios.primicias;
+        if( s.contains("epublica") )return medios.larepublica;
+        if( s.contains("elegrafo") )return medios.eltelegrafo;
+        if( s.contains("oticias") )return medios.ultimasnoticias;
+        return medios.eluniverso;
+    }
+
     public String getCabeza() {
         return cabeza;
     }

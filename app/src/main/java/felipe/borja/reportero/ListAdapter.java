@@ -21,6 +21,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import static felipe.borja.reportero.R.drawable.ico_com;
+import static felipe.borja.reportero.R.drawable.ico_hor;
+import static felipe.borja.reportero.R.drawable.ico_mer;
+import static felipe.borja.reportero.R.drawable.ico_pri;
+import static felipe.borja.reportero.R.drawable.ico_rep;
 import static felipe.borja.reportero.R.drawable.ico_tel;
 import static felipe.borja.reportero.R.drawable.ico_ult;
 import static felipe.borja.reportero.R.drawable.ico_uni;
@@ -92,9 +96,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         medios med=noticia.getMedio();
         switch (med){
             case elcomercio:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_com));break;
+            case lahora:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_hor));break;
             case eluniverso:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_uni));break;
             case eltelegrafo:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_tel));break;
+            case mercurio:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_mer));break;
+            case primicias:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_pri));break;
             case ultimasnoticias:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_ult));break;
+            case larepublica:holder.logo.setImageDrawable( context.getResources().getDrawable(ico_rep));break;
+
             default:
         }
     }
