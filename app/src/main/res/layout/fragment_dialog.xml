@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/background_light"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:background="@color/green_300"
+        android:text="Calcular Hoy Circula"/>
+    <TextView
+        android:id="@+id/infoFechaActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo"
+        android:text="Ingresar hora y fecha"/>
+    <EditText
+        android:id="@+id/ingresarHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/infoFechaActual"
+        android:ems="10"
+        android:inputType="date"/>
+
+    <EditText
+        android:id="@+id/ingresarFecha"
+        android:layout_below="@+id/ingresarHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
+        />
+    <TextView
+        android:id="@+id/infoPlaca"
+        android:layout_below="@+id/ingresarFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese la placa"/>
+    <EditText
+        android:layout_below="@+id/infoPlaca"
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="AAA-1234"
+        />
+    <TextView
+        android:layout_below="@+id/editText"
+        android:id="@+id/resultado"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/holo_red_light"
+        android:text="RESTULTADO"/>
+
+</RelativeLayout>
